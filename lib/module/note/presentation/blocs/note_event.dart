@@ -7,8 +7,15 @@ import '../../domain/usecases/status_note_use_case.dart';
 abstract class NoteEvent extends Equatable {}
 
 class NotesRequested extends NoteEvent {
+  NotesRequested({
+    required this.userId,
+  });
+  final String userId;
+
   @override
-  List<Object?> get props => [];
+  List<String> get props => [
+        userId,
+      ];
 }
 
 class AddNoteRequested extends NoteEvent {

@@ -15,10 +15,10 @@ class NoteRepositoryImpl extends NoteRepository {
   final NoteRemoteDataSource noteRemoteDataSource;
 
   @override
-  ResultFuture<List<NoteEntity>> getNotes() async {
+  ResultFuture<List<NoteEntity>> getNotes(String userId) async {
     try {
       final List<NoteEntity> responseData =
-          await noteRemoteDataSource.getNotes();
+          await noteRemoteDataSource.getNotes(userId);
       return Right(responseData);
     } on Exception catch (exception) {
       return handleRepositoryException(

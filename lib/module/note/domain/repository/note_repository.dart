@@ -3,7 +3,7 @@ import '../../../shared/dtos/note_dto.dart';
 import '../entities/note_entity.dart';
 
 abstract class NoteRepository {
-  ResultFuture<List<NoteEntity>> getNotes();
+  ResultFuture<List<NoteEntity>> getNotes(String userId);
 
   ResultFuture<bool> addNote({
     required NoteDto param,

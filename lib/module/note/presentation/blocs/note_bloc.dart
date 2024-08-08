@@ -138,7 +138,7 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
   ) async {
     emit(NoteLoading());
 
-    final resultData = await getNoteUseCase();
+    final resultData = await getNoteUseCase(event.userId);
 
     resultData.fold(
       (Failure failure) => emit(

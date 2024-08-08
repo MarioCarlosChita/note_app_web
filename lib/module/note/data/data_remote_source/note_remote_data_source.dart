@@ -4,7 +4,7 @@ import '../../../shared/dtos/note_dto.dart';
 import '../models/note_model.dart';
 
 abstract class NoteRemoteDataSource {
-  Future<List<NoteModel>> getNotes();
+  Future<List<NoteModel>> getNotes(String userId);
 
   Future<bool> addNote(NoteDto param);
 
@@ -22,13 +22,18 @@ class NoteRemoteDataSourceImpl extends NoteRemoteDataSource {
   final AppSupabaseClient appSupabaseClient;
 
   @override
-  Future<List<NoteModel>> getNotes() async {
+  Future<List<NoteModel>> getNotes(String userId) async {
     try {
-      List<Map<String, dynamic>> responseData =
-          await appSupabaseClient.supabase.from('note_tb').select();
+      List<Map<String, dynamic>> responseData = await appSupabaseClient.supabase
+          .from('note_tb')
+          .select()
+          .eq('userId', userId);
 
-      List<NoteModel> notesData =
-          List.from(responseData.map((note) => NoteModel.fromJson(note)));
+      List<NoteModel> notesData = List.from(
+        responseData.map(
+          (note) => NoteModel.fromJson(note),
+        ),
+      );
 
       return notesData;
     } catch (exception) {

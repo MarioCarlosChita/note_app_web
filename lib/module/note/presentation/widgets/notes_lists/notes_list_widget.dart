@@ -2,6 +2,7 @@ import 'package:eva_icons_flutter/eva_icons_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:note_app_web/core/services/guard_route_service.dart';
 import 'package:quickalert/models/quickalert_type.dart';
 import 'package:quickalert/widgets/quickalert_dialog.dart';
 
@@ -42,7 +43,11 @@ class _NotesListWidgetState extends State<NotesListWidget> {
   int get _amountNotes => _notes.length;
 
   void _onLoadNotes() {
-    context.read<NoteBloc>().add(NotesRequested());
+    context.read<NoteBloc>().add(
+          NotesRequested(
+            userId: GuardRouteService.currentUser?.id ?? '',
+          ),
+        );
   }
 
   void _onConfirmButtonIconPressed() {

@@ -35,7 +35,9 @@ class _AddAndEditNoteWidgetState extends State<AddAndEditNoteWidget> {
   bool _isTitleEmpty = false;
 
   void _onLoadNotes() {
-    context.read<NoteBloc>().add(NotesRequested());
+    context.read<NoteBloc>().add(NotesRequested(
+          userId: GuardRouteService.currentUser?.id ?? '',
+        ));
   }
 
   void _onResetTextToBoldAndItalic() {
